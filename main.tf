@@ -20,12 +20,13 @@ module "my-cluster" {
   cluster_version = "1.17"
   subnets         =  var.subnet_ids
   vpc_id          =  var.vpc_id
-  region          =  var.region
 
   worker_groups = [
     {
       instance_type = "t2.micro"
       asg_max_size  = 2
+      region          =  var.region
+
     }
   ]
 }
