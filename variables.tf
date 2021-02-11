@@ -1,18 +1,19 @@
-variable "region" {
+variable "cluster_name" {
   type        = string
-  description = "AWS Region"
-  default = "us-east-1"
+  description = "AWS cluster_name"
+  default = "computool-eks"
 }
+
 
 variable "vpc_id" {
   type        = string
   description = "VPC ID for the EKS cluster"
-  default = "vpc-df0751b1"
 }
 
 variable "subnet_ids" {
   description = "A list of subnet IDs to launch the cluster in"
   type        = list(string)
+  
 }
 
 variable "allowed_security_groups" {
