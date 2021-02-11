@@ -16,10 +16,10 @@ provider "kubernetes" {
 
 module "my-cluster" {
   source          = "terraform-aws-modules/eks/aws"
-  cluster_name    = "computool-eks"
+  cluster_name    = var.cluster_name
   cluster_version = "1.17"
-  subnets         = ["subnet-abcde012", "subnet-bcde012a", "subnet-fghi345a"]
-  vpc_id          = "vpc-1234556abcdef"
+  subnets         =  var.subnet_id
+  vpc_id          =  var.vpc_id
 
   worker_groups = [
     {
