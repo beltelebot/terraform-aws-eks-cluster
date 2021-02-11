@@ -1,9 +1,14 @@
 variable "cluster_name" {
   type        = string
   description = "AWS cluster_name"
-  default = "computool-eks"
+  default = "us-east-1"
 }
 
+variable "region" {
+  type        = string
+  description = "AWS cluster region"
+  default = ""
+}
 
 variable "vpc_id" {
   type        = string
