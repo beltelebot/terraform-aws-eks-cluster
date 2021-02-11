@@ -6,6 +6,7 @@ data "aws_eks_cluster" "cluster" {
 
 data "aws_eks_cluster_auth" "cluster" {
   name = module.my-cluster.cluster_id
+  region          =  var.region    
 }
 
 provider "kubernetes" {
