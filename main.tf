@@ -20,6 +20,7 @@ module "my-cluster" {
   cluster_version = "1.17"
   subnets         =  var.subnet_ids
   vpc_id          =  var.vpc_id
+  region          =  var.region
 
   worker_groups = [
     {
