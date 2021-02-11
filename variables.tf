@@ -13,11 +13,12 @@ variable "region" {
 variable "vpc_id" {
   type        = string
   description = "VPC ID for the EKS cluster"
+  default     = "vpc-df0751b1"
 }
 
 variable "subnet_ids" {
   description = "A list of subnet IDs to launch the cluster in"
   type        = list(string)
-  
+  default     = ["subnet-48218d63","subnet-fe035590"]
 }
 
