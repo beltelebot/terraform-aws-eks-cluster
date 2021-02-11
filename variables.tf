@@ -1,12 +1,13 @@
 variable "region" {
   type        = string
   description = "AWS Region"
-  default = "us-east-2"
+  default = "us-east-1"
 }
 
 variable "vpc_id" {
   type        = string
   description = "VPC ID for the EKS cluster"
+  default = "vpc-df0751b1"
 }
 
 variable "subnet_ids" {
