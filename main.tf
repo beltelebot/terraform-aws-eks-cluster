@@ -1,5 +1,7 @@
 data "aws_eks_cluster" "cluster" {
   name = module.my-cluster.cluster_id
+  region          =  var.region
+
 }
 
 data "aws_eks_cluster_auth" "cluster" {
@@ -20,7 +22,6 @@ module "my-cluster" {
   cluster_version = "1.17"
   subnets         =  var.subnet_ids
   vpc_id          =  var.vpc_id
-  region          =  var.region
 
   worker_groups = [
     {
