@@ -39,8 +39,8 @@
     name       = var.name
     attributes = var.attributes
     tags       = var.tags
-    subnets         =  var.subnet_ids
-    vpc_id          =  var.vpc_id
+    subnet_ids =  var.subnet_ids
+    vpc_id     =  var.vpc_id
 
     kubernetes_version    = var.kubernetes_version
     oidc_provider_enabled = false
