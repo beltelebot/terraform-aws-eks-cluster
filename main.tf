@@ -36,7 +36,7 @@
     # version     = "x.x.x"
     namespace  = var.namespace
     stage      = var.stage
-    name       = var.name
+    name       = var.cluster_name
     attributes = var.attributes
     tags       = var.tags
     subnet_ids =  var.subnet_ids
