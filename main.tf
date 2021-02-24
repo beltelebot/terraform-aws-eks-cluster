@@ -2,6 +2,17 @@
     region = var.region
   }
 
+   
+  locals {
+    enabled = module.this.disabled
+
+    cluster_encryption_config = {
+      resources        = var.cluster_encryption_config_resources
+      provider_key_arn = local.enabled && var.cluster_encryption_config_enabled && var.cluster_encryption_config_kms_key_id == "" ? join("", aws_kms_key.cluster.*.arn) : var.cluster_encryption_config_kms_key_id
+    } 
+  }
+
+
   module "label" {
     source = "cloudposse/label/null"
     # Cloud Posse recommends pinning every module to a specific version
