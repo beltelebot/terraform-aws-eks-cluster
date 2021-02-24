@@ -1,7 +1,7 @@
-variable "cluster_name" {
+variable "name" {
   type        = string
   description = "AWS cluster_name"
-  default = "computooleks"
+  default = "cteks"
 }
 
 variable "region" {
