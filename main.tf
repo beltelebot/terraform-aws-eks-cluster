@@ -4,7 +4,7 @@
 
    
   locals {
-    enabled = module.this.disabled
+    enabled = module.this.enabled
 
     cluster_encryption_config = {
       resources        = var.cluster_encryption_config_resources
@@ -36,7 +36,6 @@
     # enforce usage of eks_worker_ami_name_filter variable to set the right kubernetes version for EKS workers,
     # otherwise the first version of Kubernetes supported by AWS (v1.11) for EKS workers will be used, but
     # EKS control plane will use the version specified by kubernetes_version variable.
-    eks_worker_ami_name_filter = "amazon-eks-node-${var.kubernetes_version}*"
   }
 
 
@@ -54,8 +53,5 @@
     vpc_id     =  var.vpc_id
 
     kubernetes_version    = var.kubernetes_version
-    oidc_provider_enabled = false
-
-
     region     = var.region  
   }
