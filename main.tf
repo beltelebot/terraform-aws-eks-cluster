@@ -28,62 +28,7 @@
     eks_worker_ami_name_filter = "amazon-eks-node-${var.kubernetes_version}*"
   }
 
-  module "vpc" {
-    source = "cloudposse/vpc/aws"
-    # Cloud Posse recommends pinning every module to a specific version
-    # version     = "x.x.x"
-    namespace  = var.namespace
-    stage      = var.stage
-    name       = var.name
-    attributes = var.attributes
-    cidr_block = "172.16.0.0/16"
-    tags       = local.tags
-  }
 
-  module "subnets" {
-    source = "cloudposse/dynamic-subnets/aws"
-    # Cloud Posse recommends pinning every module to a specific version
-    # version     = "x.x.x"
-    availability_zones   = var.availability_zones
-    namespace            = var.namespace
-    stage                = var.stage
-    name                 = var.name
-    attributes           = var.attributes
-    vpc_id               = module.vpc.vpc_id
-    igw_id               = module.vpc.igw_id
-    cidr_block           = module.vpc.vpc_cidr_block
-    nat_gateway_enabled  = false
-    nat_instance_enabled = false
-    tags                 = local.tags
-  }
-
-  module "eks_workers" {
-    source = "cloudposse/eks-workers/aws"
-    # Cloud Posse recommends pinning every module to a specific version
-    # version     = "x.x.x"
-    namespace                          = var.namespace
-    stage                              = var.stage
-    name                               = var.name
-    attributes                         = var.attributes
-    tags                               = var.tags
-    instance_type                      = var.instance_type
-    eks_worker_ami_name_filter          = local.eks_worker_ami_name_filter
-    vpc_id                             = module.vpc.vpc_id
-    subnet_ids                         = module.subnets.public_subnet_ids
-    health_check_type                  = var.health_check_type
-    min_size                           = var.min_size
-    max_size                           = var.max_size
-    wait_for_capacity_timeout          = var.wait_for_capacity_timeout
-    cluster_name                       = module.label.id
-    cluster_endpoint                   = module.eks_cluster.eks_cluster_endpoint
-    cluster_certificate_authority_data = module.eks_cluster.eks_cluster_certificate_authority_data
-    cluster_security_group_id          = module.eks_cluster.security_group_id
-
-    # Auto-scaling policies and CloudWatch metric alarms
-    autoscaling_policies_enabled           = var.autoscaling_policies_enabled
-    cpu_utilization_high_threshold_percent = var.cpu_utilization_high_threshold_percent
-    cpu_utilization_low_threshold_percent  = var.cpu_utilization_low_threshold_percent
-  }
 
   module "eks_cluster" {
     source = "cloudposse/eks-cluster/aws"
@@ -94,12 +39,12 @@
     name       = var.name
     attributes = var.attributes
     tags       = var.tags
-    vpc_id     = module.vpc.vpc_id
-    subnet_ids = module.subnets.public_subnet_ids
+    subnets         =  var.subnet_ids
+    vpc_id          =  var.vpc_id
 
     kubernetes_version    = var.kubernetes_version
     oidc_provider_enabled = false
 
-    workers_security_group_ids   = [module.eks_workers.security_group_id]
-    workers_role_arns            = [module.eks_workers.workers_role_arn]
+
+    region     = var.region  
   }
