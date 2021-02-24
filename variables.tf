@@ -1,4 +1,4 @@
-variable "name" {
+variable "cluster_name" {
   type        = string
   description = "AWS cluster_name"
   default = "cteks"
