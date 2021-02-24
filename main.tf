@@ -4,7 +4,7 @@
 
    
   locals {
-    enabled = module.this.enabled
+    enabled = 0
 
     cluster_encryption_config = {
       resources        = var.cluster_encryption_config_resources
