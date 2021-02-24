@@ -21,4 +21,9 @@ variable "subnet_ids" {
   type        = list(string)
   default     = ["subnet-48218d63","subnet-fe035590"]
 }
+variable "kubernetes_version" {
+  type        = string
+  description = "kubernetes_version"
+  default     = "1.18"
+}
 
