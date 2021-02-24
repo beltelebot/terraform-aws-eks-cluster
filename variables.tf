@@ -19,7 +19,7 @@ variable "vpc_id" {
 variable "subnet_ids" {
   description = "A list of subnet IDs to launch the cluster in"
   type        = list(string)
-  default     = ["subnet-48218d63","subnet-fe035590"]
+  default     = ["subnet-0bf0dac78c17e5837","subnet-025d465a9532bb83a"]
 }
 variable "kubernetes_version" {
   type        = string
